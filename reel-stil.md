@@ -34,7 +34,13 @@ Send meg en DM eller ring 906 51 256 hvis du vil vite mer.
 ```
 
   Bildeteksten har aldri preparatnavn eller pris. Gjelder Instagram, TikTok og Facebook.
-- Første melding i DM (automatisk svar og hurtigsvar) har navn og pris inkl. mva (1 875 kr per injeksjon, 7 500 kr for serien) og krav om veterinærundersøkelse før behandling. Camilla har valgt dette selv.
+- **Første melding i DM (automatisk svar i Meta Business Suite, «Automatisk svar»; godkjent av Camilla, bruk akkurat denne):**
+
+```
+Hei! Så gøy at du er interessert! 😊 Behandlingen heter Osteopen: fire injeksjoner med 5–7 dagers mellomrom. Den beskytter leddbrusken, forbedrer leddvæsken og demper betennelsen i leddene. Pris: 1 875 kr per injeksjon, 7 500 kr for hele serien (inkl. mva). Hesten må være nylig undersøkt av veterinær først så andre årsaker er utelukket. Ring meg gjerne: 906 51 256
+```
+
+  Den har navn og pris, og er kortet ned (ca. 360 tegn) fordi feltet har tegnbegrensning. Camilla har valgt dette selv.
 
 ## Annet
 - Camilla har lite lagringsplass på telefonen: ikke send mange mellomversjoner, rydd gamle filer.
