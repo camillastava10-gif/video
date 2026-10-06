@@ -42,5 +42,15 @@ Hei! Så gøy at du er interessert! 😊 Behandlingen heter Osteopen: fire injek
 
   Den har navn og pris, og er kortet ned (ca. 360 tegn) fordi feltet har tegnbegrensning. Camilla har valgt dette selv.
 
+## Oppfølging av kunder som ikke har svart (Camilla sin tone)
+- Camilla følger opp **én gang**, kort og vennlig. Ikke press, ikke rabatt, ikke «fikk du lest meldingen?» når kunden har sett den.
+- Spør om hesten, ikke om meldingen, og tilby spørsmål her eller på telefon.
+- Ikke legg til «si fra hvis du vil jeg skal komme og se på henne» eller lignende salgspress. Camilla synes det er for pushy og ikke hennes tone.
+- Godkjent eksempel (brukt til Monica, Sveio):
+
+```
+Hei Monica! 😊 Jeg tenkte jeg skulle høre hvordan det går med hoppa. Har du spørsmål om behandlingen eller noe du lurer på, svarer jeg gjerne her eller på telefon, 906 51 256 🐴
+```
+
 ## Annet
 - Camilla har lite lagringsplass på telefonen: ikke send mange mellomversjoner, rydd gamle filer.
