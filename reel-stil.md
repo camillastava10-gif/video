@@ -21,7 +21,20 @@ Sist oppdatert 2026-10-06. Basert på reelen med intervju om leddbehandling (IMG
 - **Ikke oppgi pris i posten.** Pris og preparatnavn sendes i DM etterpå (hurtigsvar). Pris oppgis inkl. mva mot privatkunder.
 - Kunden må godkjenne video og tekster før posting. Camilla sender den selv.
 - Oppfordring til handling: «Passer det for din hest? Send DM eller ring», med telefon 906 51 256.
-- Bildetekst kort: «Passer det for din hest? Send meg en DM 🤍» + hashtags (#hestehelse #leddhelse #hest #hestevelferd #norskehester).
+- **Bildetekst (godkjent av Camilla, bruk akkurat denne):**
+
+```
+Passer det for din hest? 🐴
+
+Fire behandlinger senere merker Katelyn stor forskjell på Après du Seigneur. Hun forteller selv hvordan han forandret seg. Se videoen!
+
+Send meg en DM eller ring 906 51 256 hvis du vil vite mer.
+
+#hestehelse #leddhelse #hest #hestevelferd #hesteliv
+```
+
+  Bildeteksten har aldri preparatnavn eller pris. Gjelder Instagram, TikTok og Facebook.
+- Første melding i DM (automatisk svar og hurtigsvar) har navn og pris inkl. mva (1 875 kr per injeksjon, 7 500 kr for serien) og krav om veterinærundersøkelse før behandling. Camilla har valgt dette selv.
 
 ## Annet
 - Camilla har lite lagringsplass på telefonen: ikke send mange mellomversjoner, rydd gamle filer.
