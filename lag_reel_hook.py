@@ -167,7 +167,7 @@ def main():
     koblet = "".join(f"[v{i}][a{i}]" for i in range(k))
     fc = (";".join(deler_fc) + f";{koblet}concat=n={k}:v=1:a=1[vc][ac];"
           f"[vc]tpad=stop_mode=clone:stop_duration={ENDCARD_SEK},{','.join(deler)}[vout];"
-          f"[ac]apad=pad_dur={ENDCARD_SEK}[aout]")
+          f"[ac]loudnorm=I=-16:TP=-1.5:LRA=11,apad=pad_dur={ENDCARD_SEK}[aout]")
     subprocess.run(
         ["ffmpeg", "-y", *inn, "-filter_complex", fc, "-map", "[vout]", "-map", "[aout]",
          "-t", str(klipp + ENDCARD_SEK),
