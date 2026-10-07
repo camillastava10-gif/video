@@ -54,3 +54,10 @@ Hei Monica! 😊 Jeg tenkte jeg skulle høre hvordan det går med hoppa. Har du 
 
 ## Annet
 - Camilla har lite lagringsplass på telefonen: ikke send mange mellomversjoner, rydd gamle filer.
+
+## Reels med «Hvordan jeg ...»-hook (Sofie-vinkel, godbiter/strekk)
+- Eget skript: `lag_reel_hook.py` (ikke `lag_reel.py`, som kun er for intervjureelen om leddbehandling).
+- Hooken står på skjermen hele klippet, øverst, samme stil som over. Alle linjer er like store (maks 92 pt, krymper automatisk hvis hooken er lang). Parentesen kommer på egen linje nederst i blokken.
+- Kontaktsiden (3 sek stillbilde) legges til etter klippet, helt oppe mot taket med 906 51 256.
+- Bruk: `python3 lag_reel_hook.py kilde.mov reel.mp4 --hook "Hvordan jeg frister hesten til å bli mer smidig" --undertekst "(Med en godbit)"`
+- Ordvalg: «frister» eller «lokker» (positivt og lekent). Ikke «bestikker».
