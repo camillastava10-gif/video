@@ -64,3 +64,4 @@ Hei Monica! 😊 Jeg tenkte jeg skulle høre hvordan det går med hoppa. Har du 
 - Flere klipp i én reel (intro + strekk): `python3 lag_reel_hook.py --kilde a.mov --trim 0.4-7.4 --kilde b.mov --trim 0.5-10.5 --ut reel.mp4 --hook "..." --undertekst "(...)"`. Klippene settes sammen i rekkefølge, lyden følger med.
 - Komprimering er crf 27 (ca. 17 MB for 30 sek), fordi Camilla har lite lagringsplass.
 - Første reel laget med dette: «Hvordan jeg lokker hesten til å bli mer smidig (Med en godbit)», intro + «out to left» + «to left but».
+- Tekst nederst (Camilla vil ikke ha den over ansikt og hest): `--hook-y 1290 --cta-y 1240 --maks-size 84`. `--stum 3` tar bort lyden i klipp nummer 3. Siste utgave av første reel: intro + «out to left» + «to left but» (0.5-6.2, uten lyd fordi mannen snakker), 25,7 sek.

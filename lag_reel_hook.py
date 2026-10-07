@@ -59,9 +59,9 @@ def bryt(tekst, size):
     return linjer
 
 
-def tilpass(hook, undertekst):
+def tilpass(hook, undertekst, maks=MAX_SIZE):
     """Største lik størrelse der alt får plass i maks 5 linjer og hvert ord er innenfor bredden."""
-    for size in range(MAX_SIZE, MIN_SIZE - 1, -2):
+    for size in range(maks, MIN_SIZE - 1, -2):
         linjer = bryt(hook, size)
         if undertekst:
             linjer += bryt(undertekst, size)
@@ -98,6 +98,10 @@ def main():
     p.add_argument("--kilde", action="append", default=[], help="Klipp som skal med (kan gjentas)")
     p.add_argument("--trim", action="append", default=[], help="start-slutt i sekunder for klippet over, f.eks. 0.5-7.5")
     p.add_argument("--ut", help="Ferdig reel (når --kilde brukes)")
+    p.add_argument("--stum", type=int, action="append", default=[], help="Nummer (fra 1) på klippet som skal uten lyd, kan gjentas")
+    p.add_argument("--hook-y", type=int, default=TOP, help="Hvor hooken starter fra toppen i piksler (standard 185)")
+    p.add_argument("--cta-y", type=int, default=CTA_TOP, help="Hvor kontaktsiden starter fra toppen (standard 110)")
+    p.add_argument("--maks-size", type=int, default=MAX_SIZE, help="Største skriftstørrelse for hooken (standard 92)")
     p.add_argument("--hook", required=True, help="Hovedsetningen, f.eks. «Hvordan jeg frister hesten ...»")
     p.add_argument("--undertekst", default="", help="Parentesen, f.eks. «(Med en godbit)»")
     p.add_argument("--start", type=float, default=1.0, help="Ett klipp: sekunder som klippes bort først (standard 1.0)")
@@ -125,7 +129,7 @@ def main():
         klipp_liste = [(kilde, a.start, slutt)]
 
     klipp = round(sum(e - s for _, s, e in klipp_liste), 2)
-    size, linjer = tilpass(a.hook, a.undertekst)
+    size, linjer = tilpass(a.hook, a.undertekst, a.maks_size)
     tmp = tempfile.mkdtemp()
     deler, n = [], 0
 
@@ -138,13 +142,13 @@ def main():
         return path
 
     # Hooken står på skjermen hele klippet
-    y = TOP
+    y = a.hook_y
     for linje in linjer:
         deler.append(drawtext(tekstfil(linje), size, y, 0.0, klipp))
         y += int(size * 1.3)
 
     # Kontaktsiden kommer på stillbildet etter klippet
-    y = CTA_TOP
+    y = a.cta_y
     for linje, s in CTA_LINJER:
         deler.append(drawtext(tekstfil(linje), s, y, klipp, klipp + ENDCARD_SEK))
         y += int(s * 1.3)
@@ -160,9 +164,14 @@ def main():
             f"[{i}:v]trim=start={s}:end={e},setpts=PTS-STARTPTS,{tone}"
             f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,fps=30,"
             f"format=yuv420p[v{i}]")
-        deler_fc.append(
-            f"[{i}:a:0]atrim=start={s}:end={e},asetpts=PTS-STARTPTS,aresample=48000,"
-            f"aformat=sample_fmts=fltp:channel_layouts=stereo[a{i}]")
+        if (i + 1) in a.stum:
+            deler_fc.append(
+                f"anullsrc=r=48000:cl=stereo,atrim=duration={e - s},asetpts=PTS-STARTPTS,"
+                f"aformat=sample_fmts=fltp:channel_layouts=stereo[a{i}]")
+        else:
+            deler_fc.append(
+                f"[{i}:a:0]atrim=start={s}:end={e},asetpts=PTS-STARTPTS,aresample=48000,"
+                f"aformat=sample_fmts=fltp:channel_layouts=stereo[a{i}]")
     k = len(klipp_liste)
     koblet = "".join(f"[v{i}][a{i}]" for i in range(k))
     fc = (";".join(deler_fc) + f";{koblet}concat=n={k}:v=1:a=1[vc][ac];"
