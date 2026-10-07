@@ -4,11 +4,15 @@
 Eget skript for «Hvordan jeg ... (Med ...)»-reels. Skriptet `lag_reel.py` er laget for
 intervjureelen og brukes ikke her. Stil og farger er de samme som i reel-stil.md.
 
-Bruk:
+Bruk (ett klipp):
   python3 lag_reel_hook.py kilde.mov reel.mp4 \
       --hook "Hvordan jeg frister hesten til å bli mer smidig" \
       --undertekst "(Med en godbit)" \
       [--start 1.0] [--lengde 27]
+
+Bruk (flere klipp som settes sammen i rekkefølge, hvert med sin utklipping start-slutt):
+  python3 lag_reel_hook.py --kilde a.mov --trim 0.5-7.5 --kilde b.mov --trim 0.5-11 \
+      --ut reel.mp4 --hook "..." --undertekst "(...)"
 
 Hooken brytes automatisk i linjer, og alle linjene får lik skriftstørrelse (maks 92).
 Undertekst skrives på egen linje nederst i samme blokk. Kontaktsiden (3 sek stillbilde)
@@ -90,20 +94,37 @@ def drawtext(path, size, y, start, slutt):
 
 def main():
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawTextHelpFormatter)
-    p.add_argument("kilde")
-    p.add_argument("ut")
+    p.add_argument("posisjonell", nargs="*", help="kilde.mov reel.mp4 (ett klipp)")
+    p.add_argument("--kilde", action="append", default=[], help="Klipp som skal med (kan gjentas)")
+    p.add_argument("--trim", action="append", default=[], help="start-slutt i sekunder for klippet over, f.eks. 0.5-7.5")
+    p.add_argument("--ut", help="Ferdig reel (når --kilde brukes)")
     p.add_argument("--hook", required=True, help="Hovedsetningen, f.eks. «Hvordan jeg frister hesten ...»")
     p.add_argument("--undertekst", default="", help="Parentesen, f.eks. «(Med en godbit)»")
-    p.add_argument("--start", type=float, default=1.0, help="Sekunder som klippes bort først (standard 1.0)")
-    p.add_argument("--lengde", type=float, default=27.0, help="Maks lengde på selve klippet (standard 27)")
+    p.add_argument("--start", type=float, default=1.0, help="Ett klipp: sekunder som klippes bort først (standard 1.0)")
+    p.add_argument("--lengde", type=float, default=27.0, help="Ett klipp: maks lengde (standard 27)")
     a = p.parse_args()
 
-    varighet, hdr = hent_info(a.kilde)
-    klipp = min(a.lengde, varighet - a.start)
-    if klipp <= 0:
-        raise SystemExit("Videoen er kortere enn --start.")
-    klipp = round(klipp, 2)
+    if a.kilde:
+        if not a.ut:
+            raise SystemExit("Mangler --ut.")
+        if len(a.trim) != len(a.kilde):
+            raise SystemExit("Hver --kilde må ha en --trim.")
+        ut = a.ut
+        klipp_liste = []
+        for kilde, trim in zip(a.kilde, a.trim):
+            s, e = (float(x) for x in trim.split("-"))
+            klipp_liste.append((kilde, s, e))
+    else:
+        if len(a.posisjonell) != 2:
+            raise SystemExit("Bruk: lag_reel_hook.py kilde.mov reel.mp4 --hook ... (eller --kilde/--trim/--ut)")
+        kilde, ut = a.posisjonell
+        varighet, _ = hent_info(kilde)
+        slutt = min(a.start + a.lengde, varighet)
+        if slutt <= a.start:
+            raise SystemExit("Videoen er kortere enn --start.")
+        klipp_liste = [(kilde, a.start, slutt)]
 
+    klipp = round(sum(e - s for _, s, e in klipp_liste), 2)
     size, linjer = tilpass(a.hook, a.undertekst)
     tmp = tempfile.mkdtemp()
     deler, n = [], 0
@@ -128,22 +149,34 @@ def main():
         deler.append(drawtext(tekstfil(linje), s, y, klipp, klipp + ENDCARD_SEK))
         y += int(s * 1.3)
 
-    tone = ("zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=hable:desat=0,"
-            "zscale=t=bt709:m=bt709:r=tv,format=yuv420p," if hdr else "")
-    vf = (
-        f"{tone}scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,"
-        f"format=yuv420p,tpad=stop_mode=clone:stop_duration={ENDCARD_SEK},"
-        + ",".join(deler)
-    )
+    inn, deler_fc, hdr_alle = [], [], []
+    for i, (kilde, s, e) in enumerate(klipp_liste):
+        _, hdr = hent_info(kilde)
+        hdr_alle.append(hdr)
+        tone = ("zscale=t=linear:npl=100,format=gbrpf32le,zscale=p=bt709,tonemap=hable:desat=0,"
+                "zscale=t=bt709:m=bt709:r=tv,format=yuv420p," if hdr else "")
+        inn += ["-i", kilde]
+        deler_fc.append(
+            f"[{i}:v]trim=start={s}:end={e},setpts=PTS-STARTPTS,{tone}"
+            f"scale={W}:{H}:force_original_aspect_ratio=increase,crop={W}:{H},setsar=1,fps=30,"
+            f"format=yuv420p[v{i}]")
+        deler_fc.append(
+            f"[{i}:a:0]atrim=start={s}:end={e},asetpts=PTS-STARTPTS,aresample=48000,"
+            f"aformat=sample_fmts=fltp:channel_layouts=stereo[a{i}]")
+    k = len(klipp_liste)
+    koblet = "".join(f"[v{i}][a{i}]" for i in range(k))
+    fc = (";".join(deler_fc) + f";{koblet}concat=n={k}:v=1:a=1[vc][ac];"
+          f"[vc]tpad=stop_mode=clone:stop_duration={ENDCARD_SEK},{','.join(deler)}[vout];"
+          f"[ac]apad=pad_dur={ENDCARD_SEK}[aout]")
     subprocess.run(
-        ["ffmpeg", "-y", "-ss", str(a.start), "-i", a.kilde, "-vf", vf,
-         "-af", f"apad=pad_dur={ENDCARD_SEK}", "-t", str(klipp + ENDCARD_SEK),
-         "-c:v", "libx264", "-crf", "23", "-preset", "medium", "-pix_fmt", "yuv420p",
+        ["ffmpeg", "-y", *inn, "-filter_complex", fc, "-map", "[vout]", "-map", "[aout]",
+         "-t", str(klipp + ENDCARD_SEK),
+         "-c:v", "libx264", "-crf", "27", "-preset", "medium", "-pix_fmt", "yuv420p",
          "-colorspace", "bt709", "-color_primaries", "bt709", "-color_trc", "bt709",
-         "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", a.ut],
+         "-c:a", "aac", "-b:a", "128k", "-movflags", "+faststart", ut],
         check=True,
     )
-    print(f"Ferdig: {a.ut} ({klipp + ENDCARD_SEK:.1f} sek, tekst {size} pt, HDR={hdr})")
+    print(f"Ferdig: {ut} ({klipp + ENDCARD_SEK:.1f} sek, tekst {size} pt, HDR={hdr_alle})")
 
 
 if __name__ == "__main__":
