@@ -65,3 +65,7 @@ Hei Monica! 😊 Jeg tenkte jeg skulle høre hvordan det går med hoppa. Har du 
 - Komprimering er crf 27 (ca. 17 MB for 30 sek), fordi Camilla har lite lagringsplass.
 - Første reel laget med dette: «Hvordan jeg lokker hesten til å bli mer smidig (Med en godbit)», intro + «out to left» + «to left but».
 - Tekst nederst (Camilla vil ikke ha den over ansikt og hest): `--hook-y 1290 --cta-y 1240 --maks-size 84`. `--stum 3` tar bort lyden i klipp nummer 3. Siste utgave av første reel: intro + «out to left» + «to left but» (0.5-6.2, uten lyd fordi mannen snakker), 25,7 sek.
+
+## Språk
+- Camilla vil ha svar og samtale på norsk. Alle poster og all tekst til postene (video, bildetekst, karusell, PDF) skal være på engelsk (fra 2026-10-23).
+- «The 5-Minute Soundness Check» (gratis PDF til DM) lages med `lag_soundness_pdf.py`. Teksten står i skriptet. Ikke preparatnavn, pris eller løfter om resultat. Disclaimeren i PDF-en er ikke juridisk gjennomgått.
