@@ -125,7 +125,7 @@ def build():
                  "Are the steps the same length on both sides?",
                  "Does the rhythm sound and look even, with the same beat on each foot?"]),
         Spacer(1, 4),
-        Paragraph("Lameness is often very subtle. Many owners cannot see it until it is more advanced. Film from "
+        Paragraph("Lameness is often very subtle. Many owners cannot see it until it's more advanced. Film from "
                   "the same spot each time. You can watch the video several times, also in slow motion.", base),
         Paragraph("Lameness is usually easier to see at the trot, and walking only shows larger differences. "
                   "If you can trot your horse safely on firm, level ground, film that too.", base)]))
