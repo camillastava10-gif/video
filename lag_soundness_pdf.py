@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Lager PDF-en «The 5-Minute Soundness Check» (engelsk tekst, til lead magnet i DM).
+"""Lager PDF-en «The 10-Minute Weekly Horse Check» (engelsk tekst, til lead magnet i DM).
 
 Teksten står i CONTENT nederst i denne filen. Endre teksten der og kjør på nytt.
 
@@ -56,24 +56,26 @@ def footer(canvas, doc):
     canvas.saveState()
     canvas.setFont("Helvetica", 8.5)
     canvas.setFillColor(colors.HexColor("#777777"))
-    canvas.drawString(20 * mm, 12 * mm, "The 5-Minute Soundness Check  |  Camilla Stava, veterinarian")
+    canvas.drawString(20 * mm, 12 * mm, "The 10-Minute Weekly Horse Check  |  Camilla Stava, veterinarian")
     canvas.drawRightString(A4[0] - 20 * mm, 12 * mm, f"Page {doc.page}")
     canvas.restoreState()
 
 
 def build():
     s = []
-    s += [Paragraph("The 5-Minute Soundness Check", title),
+    s += [Paragraph("The 10-Minute Weekly Horse Check", title),
           Paragraph("A simple look at your horse before you ride", sub),
           Paragraph("By Camilla Stava, veterinarian", by),
-          Paragraph("You do not need special tools. You need level ground, a phone, and 5 minutes. "
+          Paragraph("You do not need special tools. You need level ground, a phone, and 10 minutes. "
                     "Do the check at the same place and time each week, so you can compare.", base)]
 
     s.append(KeepTogether([Paragraph("Before you start", h), bullets([
         "Your horse wears <b>only a halter and lead rope</b>. No rug, saddle, pad, bandages or boots. "
         "Anything on the body hides what you need to see.",
         "Use level, firm ground.",
-        "Have a helper if you can. Handle your horse calmly, and stop if it becomes tense."])]))
+        "Have a helper if you can. Handle your horse calmly, and stop if it becomes tense.",
+        "<b>Keep a journal.</b> Write down the date, what you saw, and which side. A single odd day tells "
+        "you very little. Patterns over several weeks tell you more."])]))
 
     s.append(KeepTogether([Paragraph("Step 1: Stand and photograph", h),
         Paragraph("Let your horse stand naturally. Do not place its legs. Take a photo of the <b>left side</b>, "
@@ -88,7 +90,10 @@ def build():
         Paragraph("Look at the photos:", base),
         bullets(["Is the weight on all four feet?",
                  "Are the <b>front legs, the hind legs, or both</b> standing further under the body than normal?",
-                 "Does it keep shifting weight or holding one leg forward?"])]))
+                 "Does it keep shifting weight or holding one leg forward?"]),
+        Spacer(1, 4),
+        Paragraph("Resting one hind leg while relaxed is normal. Repeatedly avoiding weight on the same leg "
+                  "is not.", base)]))
 
     s.append(KeepTogether([Paragraph("Step 2: Look at the face", h),
         Paragraph("Take a close-up photo of the face from the side and the front. Do it when your horse is calm "
@@ -99,9 +104,7 @@ def build():
                  "<b>Eyes:</b> a tense stare, or tension in the muscle above the eye",
                  "<b>Nostrils:</b> dilated, or pulled out to the sides",
                  "<b>Muzzle:</b> lips pressed together, and a flat or edged chin",
-                 "<b>Facial muscles:</b> tense",
-                 "From Dr. Sue Dyson's ethogram: the white of the eye showing, eyes closed or half closed, "
-                 "or the ears held flat"]),
+                 "<b>Facial muscles:</b> tense"]),
         Spacer(1, 4),
         Paragraph("These scales were made for trained observers, and the pain face was studied in horses with "
                   "mild to moderate acute pain. One sign on its own does not mean your horse is in pain, and a "
@@ -122,8 +125,10 @@ def build():
                  "Are the steps the same length on both sides?",
                  "Does the rhythm sound and look even, with the same beat on each foot?"]),
         Spacer(1, 4),
-        Paragraph("Lameness is often very subtle. Many owners cannot see it until it is bad. Film from the same "
-                  "spot each time. You can watch the video several times, also in slow motion.", base)]))
+        Paragraph("Lameness is often very subtle. Many owners cannot see it until it is more advanced. Film from "
+                  "the same spot each time. You can watch the video several times, also in slow motion.", base),
+        Paragraph("Lameness is usually easier to see at the trot, and walking only shows larger differences. "
+                  "If you can trot your horse safely on firm, level ground, film that too.", base)]))
 
     s.append(KeepTogether([Paragraph("Step 5: Turn and bend", h),
         Paragraph("Turn your horse in a small circle each way, and ask it to follow a treat toward each shoulder.", base),
@@ -132,16 +137,12 @@ def build():
         Paragraph("If possible, ask your helper to film this step too. Never force it. If your horse resists, "
                   "stop and note it.", base)]))
 
-    s.append(KeepTogether([Paragraph("Keep a journal", h),
-        Paragraph("Write down the date, what you saw, and which side. A single odd day tells you very little. Patterns over "
-                  "several weeks tell you more.", base)]))
-
     s.append(KeepTogether([Paragraph("When to call your veterinarian", h), bullets([
-        "You see <b>any</b> difference between the left and right side, even a small one",
+        "You see a clear difference between the left and right side, or a difference that shows up again "
+        "across several checks",
         "Your horse is stiffer one way, shorter in the stride, or does not want to bend to one side",
         "Heat or swelling in a leg",
         "A sudden change in behavior",
-        "The same difference shows up again and again",
         "<b>You are unsure.</b> If something feels off in general, but you cannot say why, contact your "
         "local horse vet."])]))
 
@@ -152,7 +153,8 @@ def build():
         link("An equine pain face", "https://pmc.ncbi.nlm.nih.gov/articles/PMC4312484") +
         ". Veterinary Anaesthesia and Analgesia, 2015.",
         "Dyson S, Berger JM, Ellis AD, Mullard J. " +
-        link("Development of an ethogram for a pain scoring system in ridden horses",
+        link("Development of an ethogram for a pain scoring system in ridden horses and its application "
+             "to determine the presence of musculoskeletal pain",
              "https://doi.org/10.1016/j.jveb.2017.10.008") + ". Journal of Veterinary Behavior, 2018."])]))
 
     s.append(Spacer(1, 10))
@@ -161,10 +163,9 @@ def build():
         Paragraph("This guide is for education and observation only. It is <b>not veterinary advice, diagnosis "
                   "or treatment</b>, and it does not create a veterinarian and client relationship. It cannot "
                   "replace a physical examination by a licensed veterinarian in your country. I cannot see your horse, and "
-                  "horses can be in pain without showing it, so seeing nothing does not mean your horse is "
-                  "healthy.", small),
-        Paragraph("Lameness can be very subtle, and many owners cannot see it. This check cannot rule out "
-                  "lameness or pain, so seeing nothing does not mean your horse is sound.", small),
+                  "horses can be in pain without showing it. Lameness can also be very subtle, and many owners "
+                  "cannot see it. This check cannot rule out lameness or pain, so seeing nothing does not "
+                  "mean your horse is healthy or sound.", small),
         Paragraph("Complementary methods are a supplement to conventional veterinary medicine, never a "
                   "replacement. No result is promised or guaranteed.", small),
         Paragraph("If your horse is lame, injured, or you are worried, contact your own veterinarian at once. "
@@ -177,6 +178,6 @@ def build():
 
 
 doc = SimpleDocTemplate(OUT, pagesize=A4, leftMargin=20 * mm, rightMargin=20 * mm, topMargin=18 * mm,
-                        bottomMargin=20 * mm, title="The 5-Minute Soundness Check", author="Camilla Stava")
+                        bottomMargin=20 * mm, title="The 10-Minute Weekly Horse Check", author="Camilla Stava")
 doc.build(build(), onFirstPage=footer, onLaterPages=footer)
 print("Ferdig:", OUT)
