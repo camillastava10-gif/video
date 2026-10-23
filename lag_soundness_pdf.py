@@ -66,7 +66,7 @@ def build():
     s += [Paragraph("The 5-Minute Soundness Check", title),
           Paragraph("A simple look at your horse before you ride", sub),
           Paragraph("By Camilla Stava, veterinarian", by),
-          Paragraph("You do not need special tools. You need level ground, a phone, and five minutes. "
+          Paragraph("You do not need special tools. You need level ground, a phone, and 5 minutes. "
                     "Do the check at the same place and time each week, so you can compare.", base)]
 
     s.append(KeepTogether([Paragraph("Before you start", h), bullets([
@@ -75,12 +75,12 @@ def build():
         "Use level, firm ground.",
         "Have a helper if you can. Handle your horse calmly, and stop if it becomes tense."])]))
 
-    s.append(KeepTogether([Paragraph("Step 1: Stand and photograph (1 minute)", h),
+    s.append(KeepTogether([Paragraph("Step 1: Stand and photograph", h),
         Paragraph("Let your horse stand naturally. Do not place its legs. Take a photo of the <b>left side</b>, "
                   "the <b>right side</b> and <b>from behind</b>, from the same distance each time, with the "
                   "whole horse in the picture.", base),
         box([Paragraph("<b>Safety</b>", base), bullets([
-            "Stay at least three meters behind your horse when you photograph from behind. Never stand "
+            "Stay at least 3 meters (10 feet) behind your horse when you photograph from behind. Never stand "
             "directly behind it within kicking distance.",
             "If you want a higher angle, use a low, stable stool on level ground, away from the horse. "
             "Have a helper hold the horse. If your horse is nervous, skip the stool."])]),
@@ -90,7 +90,7 @@ def build():
                  "Are the <b>front legs, the hind legs, or both</b> standing further under the body than normal?",
                  "Does it keep shifting weight or holding one leg forward?"])]))
 
-    s.append(KeepTogether([Paragraph("Step 2: Look at the face (1 minute)", h),
+    s.append(KeepTogether([Paragraph("Step 2: Look at the face", h),
         Paragraph("Take a close-up photo of the face from the side and the front. Do it when your horse is calm "
                   "and not eating. Compare it with the relaxed face and pain face pictures in the guide linked "
                   "at the end of this document.", base),
@@ -107,33 +107,33 @@ def build():
                   "mild to moderate acute pain. One sign on its own does not mean your horse is in pain, and a "
                   "normal face does not rule it out. Compare with photos from other days.", em)]))
 
-    s.append(KeepTogether([Paragraph("Step 3: Use your hands (1 minute)", h),
+    s.append(KeepTogether([Paragraph("Step 3: Use your hands", h),
         Paragraph("Run a flat hand along the neck, back and hindquarters. Compare the left and right side.", base),
         bullets(["Does your horse flinch, pin its ears or swish its tail?",
                  "Do you feel <b>heat, swelling or hard muscles anywhere</b>, on either side?"]),
         Spacer(1, 4),
         Paragraph("Use light pressure. This is only to notice, not to treat.", base)]))
 
-    s.append(KeepTogether([Paragraph("Step 4: Watch it walk (1 minute)", h),
-        Paragraph("Ask someone to lead your horse on a straight line on firm, level ground, <b>away from you and "
-                  "toward you</b>. Watch the whole horse, then film it.", base),
+    s.append(KeepTogether([Paragraph("Step 4: Watch it walk", h),
+        Paragraph("Lead your horse on a straight line on firm, level ground, <b>away from your helper and "
+                  "toward your helper</b>. Your helper films the whole horse while you lead.", base),
         bullets(["<b>From the front:</b> Does the head move up or down more on one side than the other?",
                  "<b>From behind:</b> Does one hip rise or drop more than the other?",
                  "Are the steps the same length on both sides?",
                  "Does the rhythm sound and look even, with the same beat on each foot?"]),
         Spacer(1, 4),
-        Paragraph("Lameness is often very small. Many owners cannot see it until it is bad. Film from the same "
-                  "spot each time, and watch the video again slowly, or at half speed. You will see more than "
-                  "in real life.", base)]))
+        Paragraph("Lameness is often very subtle. Many owners cannot see it until it is bad. Film from the same "
+                  "spot each time. You can watch the video several times, also in slow motion.", base)]))
 
-    s.append(KeepTogether([Paragraph("Step 5: Turn and bend (1 minute)", h),
+    s.append(KeepTogether([Paragraph("Step 5: Turn and bend", h),
         Paragraph("Turn your horse in a small circle each way, and ask it to follow a treat toward each shoulder.", base),
         bullets(["Is one side stiffer than the other?", "Does it resist or step away?"]),
         Spacer(1, 4),
-        Paragraph("Never force it. If your horse resists, stop and note it.", base)]))
+        Paragraph("If possible, ask your helper to film this step too. Never force it. If your horse resists, "
+                  "stop and note it.", base)]))
 
-    s.append(KeepTogether([Paragraph("Write it down", h),
-        Paragraph("Date, what you saw, and which side. A single odd day tells you very little. Patterns over "
+    s.append(KeepTogether([Paragraph("Keep a journal", h),
+        Paragraph("Write down the date, what you saw, and which side. A single odd day tells you very little. Patterns over "
                   "several weeks tell you more.", base)]))
 
     s.append(KeepTogether([Paragraph("When to call your veterinarian", h), bullets([
@@ -142,8 +142,8 @@ def build():
         "Heat or swelling in a leg",
         "A sudden change in behavior",
         "The same difference shows up again and again",
-        "<b>You are unsure.</b> If something feels off when you ride, but you cannot say why, ask your vet. "
-        "You can send your videos."])]))
+        "<b>You are unsure.</b> If something feels off in general, but you cannot say why, contact your "
+        "local horse vet."])]))
 
     s.append(KeepTogether([Paragraph("Learn more about reading your horse's face", h), bullets([
         link("The Equine Pain Face, illustrated guide by Karina Bech Gleerup (Horses and People)",
@@ -160,7 +160,7 @@ def build():
         Paragraph("<b>Important: please read</b>", base),
         Paragraph("This guide is for education and observation only. It is <b>not veterinary advice, diagnosis "
                   "or treatment</b>, and it does not create a veterinarian and client relationship. It cannot "
-                  "replace a physical examination by a licensed veterinarian. I cannot see your horse, and "
+                  "replace a physical examination by a licensed veterinarian in your country. I cannot see your horse, and "
                   "horses can be in pain without showing it, so seeing nothing does not mean your horse is "
                   "healthy.", small),
         Paragraph("Lameness can be very subtle, and many owners cannot see it. This check cannot rule out "
