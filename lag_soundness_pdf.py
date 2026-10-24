@@ -73,7 +73,8 @@ def build():
         "Your horse wears <b>only a halter and lead rope</b>. No rug, saddle, pad, bandages or boots. "
         "Anything on the body hides what you need to see.",
         "Use level, firm ground.",
-        "Have a helper if you can. Handle your horse calmly, and stop if it becomes tense.",
+        "You need a helper to lead your horse in steps 4 and 5. Handle your horse calmly, and stop if it "
+        "becomes tense.",
         "<b>Keep a journal.</b> Write down the date, what you saw, and which side. A single odd day tells "
         "you very little. Patterns over several weeks tell you more."])]))
 
@@ -118,8 +119,8 @@ def build():
         Paragraph("Use light pressure. This is only to notice, not to treat.", base)]))
 
     s.append(KeepTogether([Paragraph("Step 4: Watch it walk", h),
-        Paragraph("Lead your horse on a straight line on firm, level ground, <b>away from your helper and "
-                  "toward your helper</b>. Your helper films the whole horse while you lead.", base),
+        Paragraph("Ask your helper to lead your horse on a straight line on firm, level ground, <b>away from "
+                  "you and toward you</b>, while you film the whole horse.", base),
         bullets(["<b>From the front:</b> Does the head move up or down more on one side than the other?",
                  "<b>From behind:</b> Does one hip rise or drop more than the other?",
                  "Are the steps the same length on both sides?",
@@ -131,11 +132,11 @@ def build():
                   "If you can trot your horse safely on firm, level ground, film that too.", base)]))
 
     s.append(KeepTogether([Paragraph("Step 5: Turn and bend", h),
-        Paragraph("Turn your horse in a small circle each way, and ask it to follow a treat toward each shoulder.", base),
+        Paragraph("Ask your helper to lead your horse in a small circle each way while you film. Then ask the "
+                  "horse to follow a treat toward each shoulder.", base),
         bullets(["Is one side stiffer than the other?", "Does it resist or step away?"]),
         Spacer(1, 4),
-        Paragraph("If possible, ask your helper to film this step too. Never force it. If your horse resists, "
-                  "stop and note it.", base)]))
+        Paragraph("Never force it. If your horse resists, stop and note it.", base)]))
 
     s.append(KeepTogether([Paragraph("When to call your veterinarian", h), bullets([
         "You see a clear difference between the left and right side, or a difference that shows up again "
