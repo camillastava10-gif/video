@@ -178,7 +178,8 @@ def build():
                   "unpredictable, so use caution and ask for help. To the extent permitted by law, Camilla "
                   "Stava is not responsible for injury, loss or damage resulting from use of this guide.",
                   small)]), Spacer(1, 10),
-        Paragraph("<b>Questions? Reply here.</b>", base)]))
+        Paragraph("<b>Questions?</b> Send me a DM on Instagram: " +
+                  link("@holistiskhestevet", "https://ig.me/m/holistiskhestevet"), base)]))
     return s
 
 
