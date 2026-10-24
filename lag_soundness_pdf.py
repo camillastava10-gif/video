@@ -23,7 +23,7 @@ LINK = "#1F5FAE"
 
 base = ParagraphStyle("base", fontName="Helvetica", fontSize=11.5, leading=16.5, textColor=TEXT,
                       alignment=TA_LEFT, spaceAfter=6)
-title = ParagraphStyle("title", parent=base, fontName="Helvetica-Bold", fontSize=28, leading=32,
+title = ParagraphStyle("title", parent=base, fontName="Helvetica-Bold", fontSize=25, leading=30,
                        textColor=ACCENT, spaceAfter=4)
 sub = ParagraphStyle("sub", parent=base, fontSize=14, leading=18, spaceAfter=2)
 by = ParagraphStyle("by", parent=base, fontSize=11, textColor=colors.HexColor("#555555"), spaceAfter=14)
@@ -66,6 +66,10 @@ def build():
     s += [Paragraph("The 10-Minute Weekly Horse Check", title),
           Paragraph("A simple look at your horse before you ride", sub),
           Paragraph("By Camilla Stava, veterinarian", by),
+          box([Paragraph("<b>For educational purposes only.</b> This is not veterinary advice and does not "
+                         "replace an examination by a licensed veterinarian in your country. Please read the "
+                         "full disclaimer on page 3.", small)]),
+          Spacer(1, 10),
           Paragraph("You do not need special tools. You need level ground, a phone, and 10 minutes. "
                     "Do the check at the same place and time each week, so you can compare.", base)]
 
